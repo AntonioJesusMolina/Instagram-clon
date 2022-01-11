@@ -57,25 +57,25 @@ export const Login = () => {
           <nav className={classes.footernav}>
             <ul className={classes.login__ul}>
               <li className={classes.login__li}>
-                <a href="#">About Us</a>
+                <a href="#">Quienes somos</a>
               </li>
               <li className={classes.login__li}>
-                <a href="#">Support</a>
+                <a href="#">Soporte</a>
               </li>
               <li className={classes.login__li}>
-                <a href="#">Jobs</a>
+                <a href="#">Empleo</a>
               </li>
               <li className={classes.login__li}>
-                <a href="#">Privacy</a>
+                <a href="#">Privacidad</a>
               </li>
               <li className={classes.login__li}>
-                <a href="#">Terms</a>
+                <a href="#">Terminos</a>
               </li>
               <li className={classes.login__li}>
-                <a href="#">Profiles</a>
+                <a href="#">Perfiles</a>
               </li>
               <li className={classes.login__li}>
-                <a href="#">Languages</a>
+                <a href="#">Idioma</a>
               </li>
               <li className={classes.login__li}>
                 <div className="copyright-notice">&copy; 2022 Ajme</div>
@@ -105,7 +105,14 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   login___inputElement: {
+    width: "100%",
+    fontSize: "0.65rem",
+    background: "#EAEAEA",
     marginTop: "10px",
+    padding: "0.8rem",
+    marginBottom: "0.5rem",
+    border: "1px solid black",
+    borderRadius: "0.4rem",
   },
   login___inputBoton: {
     width: "99%",
