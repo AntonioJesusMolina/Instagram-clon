@@ -9,7 +9,7 @@ function Post() {
   return (
     <div className={classes.post}>
       <Avatar className={classes.post__avatar} alt="Antonio" src={fotoPerfil} />
-      <h3>uSERNAME</h3>
+      <h3>Username</h3>
       {/*header -> avatar + username*/}
 
       <img className={classes.post__image} src={ajme} />
