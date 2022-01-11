@@ -1,4 +1,4 @@
-/*import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import React from "react";
 import logo from "../images/Estagram.png";
 
@@ -27,4 +27,4 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer ",
     },
   },
-}));*/
+}));

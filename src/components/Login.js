@@ -4,16 +4,19 @@ import logo from "../images/Estagram.png";
 import fotologin from "../images/fotologininsta.PNG";
 import { makeStyles } from "@material-ui/core";
 import { BrowserRouter, Link } from "react-router-dom";
+//import firebase from "../config/firebase";
+import { AuthErrorCodes } from "firebase/auth";
 
 export const Login = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
+  
 
   const registrarUsuario = async (e) => {
     e.preventDefault();
+    //firebase.createUserWithEmailAndPassword(email,password).then((res)=> alert('Usuario registrado'))
+    
   };
 
   const login = async () => {};
@@ -40,6 +43,9 @@ export const Login = () => {
               />
               <button className={classes.login___inputBoton} type="submit">
                 Iniciar sesión
+              </button>
+              <button className={classes.login___inputBoton} type="submit">
+                Registrarse
               </button>
               <span className={classes.login__separador}>O intenta</span>
               <a href="#" className="facebook-login">

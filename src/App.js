@@ -1,6 +1,6 @@
 import { Navbar } from "./components/Navbar";
 import Post from "./components/Post";
-import firebase from "./Firebase";
+
 import { makeStyles } from "@material-ui/core";
 import { Login } from "./components/Login";
 

@@ -1,4 +1,4 @@
-/*import React from "react";
+import React from "react";
 import ajme from "../images/Ajme.png";
 import { makeStyles } from "@material-ui/core";
 import { Avatar } from "@material-ui/core";
@@ -29,4 +29,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default Post;*/
+export default Post;
