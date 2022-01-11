@@ -1,13 +1,14 @@
 import { Navbar } from "./components/Navbar";
 import Post from "./components/Post";
-import { makeStyles} from "@material-ui/core"
-
+import firebase from "./Firebase";
+import { makeStyles } from "@material-ui/core";
+import { Login } from "./components/Login";
 
 function App() {
   return (
     <div className="App">
-      <Navbar/>
-      <Post/>
+      <Login />
+      
       {/*Post*/}
       {/*Post*/}
     </div>

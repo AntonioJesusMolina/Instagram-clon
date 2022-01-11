@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import ajme from "../images/Ajme.png";
 import { makeStyles } from "@material-ui/core";
 import { Avatar } from "@material-ui/core";
@@ -10,7 +10,7 @@ function Post() {
     <div className={classes.post}>
       <Avatar className={classes.post__avatar} alt="Antonio" src={fotoPerfil} />
       <h3>Username</h3>
-      {/*header -> avatar + username*/}
+      
 
       <img className={classes.post__image} src={ajme} />
 
@@ -29,4 +29,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default Post;
+export default Post;*/
