@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export const Register = () => {
   const classes = useStyles();
@@ -8,9 +9,19 @@ export const Register = () => {
 
   const registrarUsuario = (e) => {
     e.preventDefault();
-    /*auth
-      .createUserWithEmailAndPassword(registerEmail, registerPassword)
-      .then((res) => alert("Usuario registrado"));*/
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        alert("Usuario registrado");
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
   };
 
   return (
@@ -33,9 +44,10 @@ export const Register = () => {
           placeholder="Contraseña"
         />
         <input
-          className="btn btn-block btn-info"
+          className={classes.login___inputBoton}
           type="submit"
-          value="Registrar"
+          value="Completar registro"
+          onSubmit={registrarUsuario}
         />
       </form>
     </div>

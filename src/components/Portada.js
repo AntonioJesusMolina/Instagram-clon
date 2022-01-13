@@ -3,7 +3,6 @@ import { Login } from "./Login";
 import { makeStyles } from "@material-ui/core";
 import fotologin from "../images/fotologininsta.PNG";
 import logo from "../images/Estagram.png";
-import { useState } from "react";
 import { Register } from "./Register";
 
 export const Portada = () => {

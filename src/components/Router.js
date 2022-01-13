@@ -6,15 +6,13 @@ import { Register } from './Register'
 
 export const Router = () => {
     return (
-        /*<BrowserRouter>
+        <BrowserRouter>
         <Switch>
             <Route exact path="/" component={Portada}/>
             <Route exact path="/register" component={Register}/>
 
         </Switch>
-
-
-        </BrowserRouter>*/
-        <div></div>
+        </BrowserRouter>
+        
     )
 }

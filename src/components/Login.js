@@ -1,52 +1,107 @@
 import React from "react";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core";
-//import { auth } from "../config/firebase";
+import { fir } from "../config/firebase";
+import { Link } from "react-router-dom";
+import { Register } from "./Register";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 
 export const Login = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [provider,setProvider] = useState("");
 
-  const registrarUsuario = async (e) => {
+  const login = (e) => {
     e.preventDefault();
-    //firebase.createUserWithEmailAndPassword(email,password).then((res)=> alert('Usuario registrado'))
-  };
 
-  const login = async () => {};
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        alert("Usuario correcto");
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert("Usuario erroneo");
+      });
+  };
+  const logingoogle = (e) => {
+    
+
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  };
 
   const logout = async () => {};
 
   return (
     <div>
-      <form className={classes.login___input}>
+      <form className={classes.login___input} onSubmit={login}>
         <input
           className={classes.login___inputElement}
+          onChange={(event) => setEmail(event.target.value)}
           type="text"
           placeholder="Teléfono, usuario o correo electrónico"
         />
         <input
           className={classes.login___inputElement}
+          onChange={(event) => setPassword(event.target.value)}
           type="password"
           placeholder="Contraseña"
         />
-        <button className={classes.login___inputBoton} type="submit">
-          Iniciar sesión
-        </button>
-        
-          <button className={classes.login___inputBoton} type="submit">
-            Registrarse
-          </button>
-        
+        <input
+          className={classes.login___inputBoton}
+          type="submit"
+          value="Acceder"
+          onSubmit={login}
+        />
+
+        {/*<button
+          className={classes.login___inputBoton}
+          type="submit"
+          onClick={(e) => {
+            <Link to="/register"></Link>;
+          }}
+        >
+          Registrarse
+        </button>*/}
 
         <span className={classes.login__separador}>O intenta</span>
         <a href="#" className="facebook-login">
           <i className="fab fa-facebook" /> Logéate con Facebook
         </a>
+        
         <a className="password-reset" href="#">
           ¿Olvidó su contraseña?
         </a>
       </form>
+      <button variant="contained" onClick={logingoogle}>Logéate con Google</button>
     </div>
   );
 };
