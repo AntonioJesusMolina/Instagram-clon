@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import fotologin from "../images/fotologininsta.PNG";
 import logo from "../images/Estagram.png";
 import { Register } from "./Register";
+import Post from "./Post";
 
 export const Portada = () => {
   const classes = useStyles();
@@ -15,16 +16,15 @@ export const Portada = () => {
         <div className={classes.login___container}>
           <img className={classes.navlogo} src={logo} alt="" />
           <div>
-              
-            <Login />
-            <Register/>
+            {/*<Login />
+            <Register/>*/}
+            <Post />
           </div>
         </div>
       </div>
       <footer>
         <div className={classes.container}>
           <nav className={classes.footernav}>
-
             <ul className={classes.login__ul}>
               <li className={classes.login__li}>
                 <a href="#">Quienes somos</a>

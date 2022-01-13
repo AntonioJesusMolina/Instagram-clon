@@ -5,16 +5,14 @@ import { fir } from "../config/firebase";
 import { Link } from "react-router-dom";
 import { Register } from "./Register";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+const provider = new GoogleAuthProvider();
 
 export const Login = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [provider,setProvider] = useState("");
 
   const login = (e) => {
     e.preventDefault();
@@ -33,9 +31,7 @@ export const Login = () => {
         alert("Usuario erroneo");
       });
   };
-  const logingoogle = (e) => {
-    
-
+  const logingoogle = () => {
     const auth = getAuth();
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -44,6 +40,7 @@ export const Login = () => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
+        alert("Usuario conectado con google");
         // ...
       })
       .catch((error) => {
@@ -61,8 +58,8 @@ export const Login = () => {
   const logout = async () => {};
 
   return (
-    <div>
-      <form className={classes.login___input} onSubmit={login}>
+    <div className={classes.login___input}>
+      <form  onSubmit={login}>
         <input
           className={classes.login___inputElement}
           onChange={(event) => setEmail(event.target.value)}
@@ -81,6 +78,7 @@ export const Login = () => {
           value="Acceder"
           onSubmit={login}
         />
+        
 
         {/*<button
           className={classes.login___inputBoton}
@@ -91,17 +89,19 @@ export const Login = () => {
         >
           Registrarse
         </button>*/}
-
+        
+      </form>
+      <button className={classes.login___inputBoton} variant="contained" onClick={logingoogle}>
+          Logéate con Google
+        </button>
         <span className={classes.login__separador}>O intenta</span>
         <a href="#" className="facebook-login">
           <i className="fab fa-facebook" /> Logéate con Facebook
         </a>
-        
+
         <a className="password-reset" href="#">
           ¿Olvidó su contraseña?
         </a>
-      </form>
-      <button variant="contained" onClick={logingoogle}>Logéate con Google</button>
     </div>
   );
 };
