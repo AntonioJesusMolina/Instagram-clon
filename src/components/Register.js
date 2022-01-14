@@ -25,7 +25,7 @@ export const Register = () => {
   };
 
   return (
-    <div className="mt-4">
+    <div className={classes.login___container}>
       <form onSubmit={registrarUsuario} className="form-group mt-3">
         <input
           onChange={(e) => {
@@ -59,9 +59,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "50px",
     display: "center",
     marginTop: "10%",
-    marginLeft: "0%",
-    marginRight: "10%",
-    marginBottom: "0%",
+    marginLeft: "30%",
+    marginRight: "30%",
   },
   login___input: {
     fontSize: "1rem",

@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import { FormGroup, makeStyles } from "@material-ui/core";
 import { Button, Row, Col } from "reactstrap";
 import * as Yup from "yup";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { fir } from "../config/firebase";
+import { getValue } from "@testing-library/user-event/dist/utils";
+import { Link } from "react-router-dom";
 
 export const FormularioFormik = () => {
   const classes = useStyles();
-  /*const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");*/
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [currentValues, setCurrentValues] = useState();
 
   const formSchema = Yup.object().shape({
     Email: Yup.string()
@@ -29,13 +32,14 @@ export const FormularioFormik = () => {
     e.preventDefault();
 
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, formSchema.Email, formSchema.Password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
 
         alert("Usuario correcto");
-        // ...
+
+        
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -57,7 +61,7 @@ export const FormularioFormik = () => {
           <FormGroup>
             <Field
               className={classes.login___inputElement}
-              //onChange={(event) => setEmail(event.target.value)}
+              //onChange={() => setEmail(getValue)}
               name="Email"
               placeholder="Email"
               type="email"
@@ -71,7 +75,7 @@ export const FormularioFormik = () => {
           <FormGroup>
             <Field
               className={classes.login___inputElement}
-              //onChange={(event) => setPassword(event.target.value)}
+              //onChange={(event) => setPassword(getValue)}
               name="Password"
               placeholder="Contraseña"
               type="password"
@@ -95,6 +99,7 @@ export const FormularioFormik = () => {
           </Row>
         </Form>
       </Formik>
+      
     </>
   );
 };
@@ -107,13 +112,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "0%",
     marginRight: "10%",
     marginBottom: "0%",
-  },
-  login___input: {
-    fontSize: "1rem",
-    display: "flex",
-    flexDirection: "column",
-    objectFit: "contain",
-    alignItems: "center",
   },
   login___inputElement: {
     width: "100%",

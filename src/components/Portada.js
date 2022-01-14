@@ -1,10 +1,11 @@
 import React from "react";
 import { Login } from "./Login";
-import { makeStyles } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import fotologin from "../images/fotologininsta.PNG";
 import logo from "../images/Estagram.png";
 import { Register } from "./Register";
 import Post from "./Post";
+import { Link, NavLink } from "react-router-dom";
 
 export const Portada = () => {
   const classes = useStyles();
@@ -17,10 +18,27 @@ export const Portada = () => {
           <img className={classes.navlogo} src={logo} alt="" />
           <div>
             <Login />
+
             {/*
-            <Register/>
+            
             <Post />*/}
           </div>
+          <form>
+            <span>O intenta</span>
+            <br />
+            <a href="#" className="facebook-login">
+              <i className="fab fa-facebook" /> Logéate con Facebook
+            </a>
+            <br />
+
+            <a className="password-reset" href="#">
+              ¿Olvidó su contraseña?
+            </a>
+            <br />
+            <Link to="/register">
+              <Button className={classes.login___inputBoton}>Registrar</Button>
+            </Link>
+          </form>
         </div>
       </div>
       <footer>
@@ -65,21 +83,37 @@ const useStyles = makeStyles((theme) => ({
     padding: "50px",
     display: "center",
     marginTop: "10%",
-    marginLeft: "0%",
     marginRight: "10%",
-    marginBottom: "0%",
+    marginBottom: "10%",
   },
   login__distribucion: {
     width: "100%",
     height: "100vh",
     display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
     flexDirection: "row",
     paddingTop: "2rem",
-    justifyContent: "center",
   },
   login__fotologin: {
+    width: "400px",
+    height: "600px",
     marginLeft: "20%",
     marginTop: "10%",
+  },
+  login___inputBoton: {
+    width: "99%",
+    objectFit: "contain",
+    marginTop: "10px",
+    marginBottom: "10px",
+    height: "1.5rem",
+    backgroundColor: "#3897f0",
+    fontSize: "0.8rem",
+    color: "#fff",
+    fontWeight: "bold",
+    border: "none",
+    borderRadius: "0.4rem",
+    cursor: "pointer",
   },
   container: {
     padding: "5rem 0",

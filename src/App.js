@@ -10,17 +10,15 @@ import { Register } from "./components/Register";
 function App() {
   return (
     <div>
-     {/*<Router>
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={Portada} />
-          <Route exact path="/register" component={Register} />
-        </Switch>
-      </div>
-     </Router>*/}
-    <Portada/>
+      <BrowserRouter>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Portada />} />
+            <Route path="register" element={<Register />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
-    
   );
 }
 const useStyles = makeStyles((theme) => ({
