@@ -1,17 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core";
-import { fir } from "../config/firebase";
-import { Link } from "react-router-dom";
-import { Register } from "./Register";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { FormularioFormik } from "./FormularioFormik";
+
+
 
 const provider = new GoogleAuthProvider();
 
 export const Login = () => {
   const classes = useStyles();
-  const [email, setEmail] = useState("");
+  /*const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const login = (e) => {
@@ -30,7 +30,7 @@ export const Login = () => {
         const errorMessage = error.message;
         alert("Usuario erroneo");
       });
-  };
+  };*/
   const logingoogle = () => {
     const auth = getAuth();
     signInWithPopup(auth, provider)
@@ -55,53 +55,9 @@ export const Login = () => {
       });
   };
 
-  const logout = async () => {};
-
   return (
     <div className={classes.login___input}>
-      <form  onSubmit={login}>
-        <input
-          className={classes.login___inputElement}
-          onChange={(event) => setEmail(event.target.value)}
-          type="text"
-          placeholder="Teléfono, usuario o correo electrónico"
-        />
-        <input
-          className={classes.login___inputElement}
-          onChange={(event) => setPassword(event.target.value)}
-          type="password"
-          placeholder="Contraseña"
-        />
-        <input
-          className={classes.login___inputBoton}
-          type="submit"
-          value="Acceder"
-          onSubmit={login}
-        />
-        
-
-        {/*<button
-          className={classes.login___inputBoton}
-          type="submit"
-          onClick={(e) => {
-            <Link to="/register"></Link>;
-          }}
-        >
-          Registrarse
-        </button>*/}
-        
-      </form>
-      <button className={classes.login___inputBoton} variant="contained" onClick={logingoogle}>
-          Logéate con Google
-        </button>
-        <span className={classes.login__separador}>O intenta</span>
-        <a href="#" className="facebook-login">
-          <i className="fab fa-facebook" /> Logéate con Facebook
-        </a>
-
-        <a className="password-reset" href="#">
-          ¿Olvidó su contraseña?
-        </a>
+      <FormularioFormik />
     </div>
   );
 };

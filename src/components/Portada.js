@@ -16,9 +16,10 @@ export const Portada = () => {
         <div className={classes.login___container}>
           <img className={classes.navlogo} src={logo} alt="" />
           <div>
-            {/*<Login />
-            <Register/>*/}
-            <Post />
+            <Login />
+            {/*
+            <Register/>
+            <Post />*/}
           </div>
         </div>
       </div>
