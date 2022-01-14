@@ -9,15 +9,18 @@ import { fir } from "../config/firebase";
 
 export const FormularioFormik = () => {
   const classes = useStyles();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  /*const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");*/
 
   const formSchema = Yup.object().shape({
-    email: Yup.string()
+    Email: Yup.string()
       .required("Campo requerido")
-      .email("Correo Electrónico invalido")
-      .max(255, `Maximo 255 caracteres`),
-    password: Yup.string()
+      .max(255, `Maximo 255 caracteres`)
+      .matches(
+        /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+        "Correo escrito erroneamente"
+      ),
+    Password: Yup.string()
       .required("Campo requerido")
       .min(6, `Mínimo 8 caracteres`),
   });
@@ -26,7 +29,7 @@ export const FormularioFormik = () => {
     e.preventDefault();
 
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, formSchema.Email, formSchema.Password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -43,13 +46,19 @@ export const FormularioFormik = () => {
 
   return (
     <>
-      <Formik validationSchema={formSchema}>
+      <Formik
+        initialValues={{
+          Email: "",
+          Password: "",
+        }}
+        validationSchema={formSchema}
+      >
         <Form>
           <FormGroup>
             <Field
               className={classes.login___inputElement}
-              onChange={(event) => setEmail(event.target.value)}
-              name="email"
+              //onChange={(event) => setEmail(event.target.value)}
+              name="Email"
               placeholder="Email"
               type="email"
             />
@@ -62,8 +71,8 @@ export const FormularioFormik = () => {
           <FormGroup>
             <Field
               className={classes.login___inputElement}
-              onChange={(event) => setPassword(event.target.value)}
-              name="password"
+              //onChange={(event) => setPassword(event.target.value)}
+              name="Password"
               placeholder="Contraseña"
               type="password"
             />
