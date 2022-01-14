@@ -24,19 +24,18 @@ export const Portada = () => {
             <Post />*/}
           </div>
           <form>
-            <span>O intenta</span>
             <br />
-            <a href="#" className="facebook-login">
+            <a href="#" className={classes.portada__texto}>
               <i className="fab fa-facebook" /> Logéate con Facebook
             </a>
             <br />
 
-            <a className="password-reset" href="#">
+            <a className={classes.portada__texto} href="#">
               ¿Olvidó su contraseña?
             </a>
             <br />
             <Link to="/register">
-              <Button className={classes.login___inputBoton}>Registrar</Button>
+              <button className={classes.login___inputBoton}>Registrar</button>
             </Link>
           </form>
         </div>
@@ -100,6 +99,9 @@ const useStyles = makeStyles((theme) => ({
     height: "600px",
     marginLeft: "20%",
     marginTop: "10%",
+  },
+  portada__texto: {
+    textAlign: "center",
   },
   login___inputBoton: {
     width: "99%",

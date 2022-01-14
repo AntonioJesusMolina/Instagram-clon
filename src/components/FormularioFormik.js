@@ -88,13 +88,14 @@ export const FormularioFormik = () => {
           </FormGroup>
           <Row>
             <Col lg={12} md={12}>
-              <Button
+              <button
                 className={classes.login___inputBoton}
                 type="submit"
                 onClick={login}
+                
               >
                 Acceder
-              </Button>
+              </button>
             </Col>
           </Row>
         </Form>

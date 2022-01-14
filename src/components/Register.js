@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   const classes = useStyles();
@@ -44,11 +45,25 @@ export const Register = () => {
           placeholder="Contraseña"
         />
         <input
+          onChange={(e) => {
+            setRegisterPassword(e.target.value);
+          }}
+          className={classes.login___inputElement}
+          type="password"
+          placeholder="Repite la contraseña"
+        />
+        <input
           className={classes.login___inputBoton}
           type="submit"
           value="Completar registro"
           onSubmit={registrarUsuario}
         />
+        
+        <Link to="/">
+          <button className={classes.login___inputBoton}>
+            ¿Tienes cuenta?
+          </button>
+        </Link>
       </form>
     </div>
   );
