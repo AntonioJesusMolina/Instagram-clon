@@ -11,8 +11,8 @@ import { Link } from "react-router-dom";
 
 export const FormularioFormik = () => {
   const classes = useStyles();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  /*const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");*/
   // const [currentValues, setCurrentValues] = useState();
 
   const formSchema = Yup.object().shape({
@@ -28,9 +28,7 @@ export const FormularioFormik = () => {
       .min(6, `Mínimo 8 caracteres`),
   });
 
-  const login = (e) => {
-    e.preventDefault();
-
+  const login = (email, password) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -38,8 +36,6 @@ export const FormularioFormik = () => {
         const user = userCredential.user;
 
         alert("Usuario correcto");
-
-        
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -55,52 +51,60 @@ export const FormularioFormik = () => {
           Email: "",
           Password: "",
         }}
+        onSubmit={(valores, { resetForm }) => {
+          /*setEmail(valores.Email);
+          setPassword(valores.Password);*/
+          console.log(valores);
+          console.log("--------------------------");
+          login(valores.Email, valores.Password);
+          resetForm({ valores: "" });
+        }}
         validationSchema={formSchema}
       >
-        <Form>
-          <FormGroup>
-            <Field
-              className={classes.login___inputElement}
-              //onChange={() => setEmail(getValue)}
-              name="Email"
-              placeholder="Email"
-              type="email"
-            />
-            <ErrorMessage
-              name="Email"
-              component="div"
-              className="field-error text-danger"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Field
-              className={classes.login___inputElement}
-              //onChange={(event) => setPassword(getValue)}
-              name="Password"
-              placeholder="Contraseña"
-              type="password"
-            />
-            <ErrorMessage
-              name="Password"
-              component="div"
-              className="field-error text-danger"
-            />
-          </FormGroup>
-          <Row>
-            <Col lg={12} md={12}>
-              <button
-                className={classes.login___inputBoton}
-                type="submit"
-                onClick={login}
-                
-              >
-                Acceder
-              </button>
-            </Col>
-          </Row>
-        </Form>
+        {({ values, handleSubmit, handleChange, handleBlur }) => (
+          <Form onSubmit={handleSubmit}>
+            <FormGroup>
+              <Field
+                className={classes.login___inputElement}
+                name="Email"
+                placeholder="Email"
+                type="email"
+                value={values.Email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <ErrorMessage
+                name="Email"
+                component="div"
+                className="field-error text-danger"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Field
+                className={classes.login___inputElement}
+                name="Password"
+                placeholder="Contraseña"
+                type="password"
+                value={values.Password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <ErrorMessage
+                name="Password"
+                component="div"
+                className="field-error text-danger"
+              />
+            </FormGroup>
+            <Row>
+              <Col lg={12} md={12}>
+                <button className={classes.login___inputBoton} type="submit">
+                  Acceder
+                </button>
+              </Col>
+            </Row>
+          </Form>
+        )}
       </Formik>
-      
     </>
   );
 };
@@ -115,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "0%",
   },
   login___inputElement: {
-    width: "100%",
+    width: "20vh",
     fontSize: "0.65rem",
     background: "#EAEAEA",
     marginTop: "10px",

@@ -84,12 +84,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "10%",
     marginRight: "10%",
     marginBottom: "10%",
+    width:"30vh"
   },
   login__distribucion: {
     width: "100%",
-    height: "100vh",
+    height: "80vh",
     display: "flex",
-    flexWrap: "wrap",
+    //flexWrap: "wrap",
     justifyContent: "center",
     flexDirection: "row",
     paddingTop: "2rem",
