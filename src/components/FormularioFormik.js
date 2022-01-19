@@ -3,11 +3,15 @@ import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import { FormGroup, makeStyles } from "@material-ui/core";
 import { Button, Row, Col } from "reactstrap";
 import * as Yup from "yup";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  linkWithRedirect,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { fir } from "../config/firebase";
 import { getValue } from "@testing-library/user-event/dist/utils";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 export const FormularioFormik = () => {
   const classes = useStyles();
@@ -36,6 +40,7 @@ export const FormularioFormik = () => {
         const user = userCredential.user;
 
         alert("Usuario correcto");
+        
       })
       .catch((error) => {
         const errorCode = error.code;

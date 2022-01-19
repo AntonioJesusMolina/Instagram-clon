@@ -1,17 +1,30 @@
 import React, { useState } from "react";
-import { Button, makeStyles } from "@material-ui/core";
+import { FormGroup, makeStyles } from "@material-ui/core";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage, useField } from "formik";
+import { Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 
 export const Register = () => {
   const classes = useStyles();
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
 
-  const registrarUsuario = (e) => {
-    e.preventDefault();
+  const formSchema = Yup.object().shape({
+    Email: Yup.string()
+      .required("Campo requerido")
+      .max(255, `Maximo 255 caracteres`)
+      .matches(
+        /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+        "Correo escrito erroneamente"
+      ),
+    Password: Yup.string()
+      .required("Campo requerido")
+      .min(6, `Mínimo 8 caracteres`),
+  });
+
+  const registrarUsuario = (email, password) => {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -26,46 +39,72 @@ export const Register = () => {
   };
 
   return (
-    <div className={classes.login___container}>
-      <form onSubmit={registrarUsuario} className="form-group mt-3">
-        <input
-          onChange={(e) => {
-            setRegisterEmail(e.target.value);
-          }}
-          className={classes.login___inputElement}
-          type="email"
-          placeholder="Email"
-        />
-        <input
-          onChange={(e) => {
-            setRegisterPassword(e.target.value);
-          }}
-          className={classes.login___inputElement}
-          type="password"
-          placeholder="Contraseña"
-        />
-        <input
-          onChange={(e) => {
-            setRegisterPassword(e.target.value);
-          }}
-          className={classes.login___inputElement}
-          type="password"
-          placeholder="Repite la contraseña"
-        />
-        <input
-          className={classes.login___inputBoton}
-          type="submit"
-          value="Completar registro"
-          onSubmit={registrarUsuario}
-        />
-        
-        <Link to="/">
-          <button className={classes.login___inputBoton}>
-            ¿Tienes cuenta?
-          </button>
-        </Link>
-      </form>
-    </div>
+    <>
+      <Formik
+        initialValues={{
+          Email: "",
+          Password: "",
+        }}
+        onSubmit={(valores, { resetForm }) => {
+          /*setEmail(valores.Email);
+          setPassword(valores.Password);*/
+          console.log(valores);
+          console.log("--------------------------");
+          registrarUsuario(valores.Email, valores.Password);
+          resetForm({ valores: "" });
+        }}
+        validationSchema={formSchema}
+      >
+        {({ values, handleSubmit, handleChange, handleBlur }) => (
+          <Form onSubmit={handleSubmit} className={classes.login___container}>
+            <FormGroup>
+              <Field
+                className={classes.login___inputElement}
+                name="Email"
+                placeholder="Email"
+                type="email"
+                value={values.Email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <ErrorMessage
+                name="Email"
+                component="div"
+                className="field-error text-danger"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Field
+                className={classes.login___inputElement}
+                name="Password"
+                placeholder="Contraseña"
+                type="password"
+                value={values.Password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <ErrorMessage
+                name="Password"
+                component="div"
+                className="field-error text-danger"
+              />
+            </FormGroup>
+            <Row>
+              <Col lg={12} md={12}>
+                <button className={classes.login___inputBoton} type="submit">
+                  Acceder
+                </button>
+              </Col>
+            </Row>
+            <Link to="/">
+              <button className={classes.login___inputBoton}>
+                ¿Tienes cuenta?
+              </button>
+            </Link>
+          </Form>
+        )}
+      </Formik>
+    </>
   );
 };
 const useStyles = makeStyles((theme) => ({

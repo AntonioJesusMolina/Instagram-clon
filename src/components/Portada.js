@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Login } from "./Login";
 import { Button, makeStyles } from "@material-ui/core";
 import fotologin from "../images/fotologininsta.PNG";
@@ -6,9 +6,30 @@ import logo from "../images/Estagram.png";
 import { Register } from "./Register";
 import Post from "./Post";
 import { Link, NavLink } from "react-router-dom";
+//import {storage} from "firebase/storage";
+import {storage} from "../config/firebase";
+
+
 
 export const Portada = () => {
   const classes = useStyles();
+  const [data, setData] = useState([]);
+  const [image, setImage] = useState('');
+
+  const listItem = () => {
+    storage.ref().child('imagenes/').listAll()
+      .then(res => {
+        res.items.forEach((item) => {
+          setData(arr => [...arr, item.name]);
+        })
+      })
+      .catch(err => {
+        alert(err.message);
+      })
+      
+  }
+  console.log(data);
+  
 
   return (
     <div>
@@ -42,7 +63,7 @@ export const Portada = () => {
       </div>
       <footer>
         <div className={classes.container}>
-          <nav className={classes.footernav}>
+          <nav >
             <ul className={classes.login__ul}>
               <li className={classes.login__li}>
                 <a href="#">Quienes somos</a>
@@ -84,7 +105,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "10%",
     marginRight: "10%",
     marginBottom: "10%",
-    width:"30vh"
+    width:"30vh",
+    height:"80%"
   },
   login__distribucion: {
     width: "100%",
