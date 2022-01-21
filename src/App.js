@@ -6,13 +6,14 @@ import { Login } from "./components/Login";
 import { Portada } from "./components/Portada";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import { Register } from "./components/Register";
+import { Database } from "./components/Database";
 
 
 function App() {
   return (
     <div>
     
-        <BrowserRouter>
+        {/*<BrowserRouter>
           <div className="App">
             <Routes>
               <Route path="/" element={<Portada />} />
@@ -20,7 +21,9 @@ function App() {
               <Route path="post" element={<Post />} />
             </Routes>
           </div>
-        </BrowserRouter>
+        </BrowserRouter>*/}
+        <Database/>
+        
     
     </div>
   );

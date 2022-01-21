@@ -7,5 +7,6 @@ export const Firestorepruebas = () => {
   //const db = getFirestore();
   const coleccion = addDoc(collection(db,"usuarios") ,{nombre:"nombre"});
   console.log(coleccion);
+  
   return <div></div>;
 };

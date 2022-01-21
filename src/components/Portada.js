@@ -1,35 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Login } from "./Login";
-import { Button, makeStyles } from "@material-ui/core";
+import { Button, makeStyles, RootRef } from "@material-ui/core";
 import fotologin from "../images/fotologininsta.PNG";
 import logo from "../images/Estagram.png";
 import { Register } from "./Register";
 import Post from "./Post";
 import { Link, NavLink } from "react-router-dom";
-//import {storage} from "firebase/storage";
-import {storage} from "../config/firebase";
-
-
+import { almacenamiento} from "../config/firebase";
+import { getStorage, ref, listAll } from "firebase/storage";
+import { Database } from "./Database";
 
 export const Portada = () => {
   const classes = useStyles();
   const [data, setData] = useState([]);
-  const [image, setImage] = useState('');
 
-  const listItem = () => {
-    storage.ref().child('imagenes/').listAll()
-      .then(res => {
-        res.items.forEach((item) => {
-          setData(arr => [...arr, item.name]);
-        })
+  useEffect(() => {
+    const listRef = ref(almacenamiento, "imagenes");
+
+    listAll(listRef)
+      .then((res) => {
+        res.items.forEach((itemRef) => {
+          //console.log(itemRef);
+          setData((arr) => [...arr, itemRef]);
+        });
       })
-      .catch(err => {
-        alert(err.message);
-      })
-      
-  }
-  console.log(data);
-  
+      .catch((error) => {});
+  }, []);
+  //console.log(data);
+
+  const fotoLoginInsta = ref(almacenamiento, "imagenes/fotologininsta.PNG");
+  console.log(fotoLoginInsta);
 
   return (
     <div>
@@ -38,11 +38,9 @@ export const Portada = () => {
         <div className={classes.login___container}>
           <img className={classes.navlogo} src={logo} alt="" />
           <div>
-            <Login />
-
-            {/*
+            {/*<Login />*/}
             
-            <Post />*/}
+
           </div>
           <form>
             <br />
@@ -63,7 +61,7 @@ export const Portada = () => {
       </div>
       <footer>
         <div className={classes.container}>
-          <nav >
+          <nav>
             <ul className={classes.login__ul}>
               <li className={classes.login__li}>
                 <a href="#">Quienes somos</a>
@@ -105,8 +103,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "10%",
     marginRight: "10%",
     marginBottom: "10%",
-    width:"30vh",
-    height:"80%"
+    width: "30vh",
+    height: "80%",
   },
   login__distribucion: {
     width: "100%",

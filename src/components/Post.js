@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ajme from "../images/Ajme.png";
-import { makeStyles } from "@material-ui/core";
+import { Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, makeStyles, Typography } from "@material-ui/core";
 import { Avatar } from "@material-ui/core";
 import fotoPerfil from "../images/Antonio-1.PNG";
 import { getDatabase, ref, child, get } from "firebase/database";
-//PARA LEERE LOS POST MIRAMOS EL EJEMPLO DEL PDF DE PATRICIA DE LOCALIDADES
+import {db} from "../config/firebase";
+import {collection } from "firebase/compat/firestore";
 
-function Post() {
+
+function Post({ nombre, textoPublicacion, imagenAvatar, urlimagen}) {
   const classes = useStyles();
+ 
 
-  const muestraBaseDatos = () => {
+  
+
+
+
+  /*const muestraBaseDatos = () => {
     const dbRef = ref(getDatabase());
     get(child(dbRef, `publicaciones`))
       .then((snapshot) => {
@@ -22,20 +29,57 @@ function Post() {
       .catch((error) => {
         console.error(error);
       });
-  };
+  };*/
 
-  return (
+  return <>
+    
     <div className={classes.post}>
-      <Avatar className={classes.post__avatar} alt="Antonio" src={fotoPerfil} />
-      <h3>Username</h3>
-      {muestraBaseDatos()}
-      {console.log("prueba")}
+      <Card>
+        <CardHeader>
+          avatar={
+              <Avatar alt="Antonio" src={imagenAvatar} >{imagenAvatar}</Avatar>
+          }
+            
+        </CardHeader>
+        <IconButton aria-label="settings">
+            
+        </IconButton>
+        <CardMedia
+        component="img"
+        image={urlimagen}
+        alt="logo"
+      />
+      <CardContent>
+        <Typography variant="body2" color="text.secondary">
+          This impressive paella is a perfect party dish and a fun meal to cook
+          together with your guests. Add 1 cup of frozen peas along with the mussels,
+          if you like.
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          
+        </IconButton>
+        <IconButton aria-label="share">
+         
+        </IconButton>
+        </CardActions>
 
-      <img className={classes.post__image} src={ajme} />
 
-      <h4 className={classes.post__text}>Mi logo para mis proyectos</h4>
+      </Card>
+      
+      
+      <h3>{nombre}</h3>
+      {/*muestraBaseDatos()*/}
+
+
+       <img className={classes.post__image} src={urlimagen} />
+       <h6 className={classes.post__text}>{textoPublicacion}</h6> 
+      
+
+      
     </div>
-  );
+    </>
 }
 const useStyles = makeStyles((theme) => ({
   post: {
