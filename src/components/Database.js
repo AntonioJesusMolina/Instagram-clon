@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import { db } from "../config/firebase";
 import instalogo from "../images/Estagram.png";
+import yo from "../images/Antonio-1.PNG";
 import {
   AppBar,
+  Avatar,
   Button,
   Grid,
   IconButton,
@@ -38,6 +40,7 @@ export const Database = () => {
         <AppBar position="sticky" className={classes.appbar}>
           <Toolbar className={classes.toolbar}>
             <img src={instalogo} className={classes.logo} alt="Logo" />
+            <Avatar className={classes.avatar} src={yo}></Avatar>
             <Button className={classes.botonlogout}>Log Out</Button>
             <IconButton
               edge="end"
@@ -47,13 +50,13 @@ export const Database = () => {
               
               <MenuIcon fontSize="large"></MenuIcon>
             </IconButton>
-            <Typography variant="h6">Este es el menu de isntagram</Typography>
+            
           </Toolbar>
         </AppBar>
 
         <Grid container className={classes.gridcard}>
-          <Grid item xs={12} style={{ height: "25vh", display: "grid" }}>
-            <Typography variant="h3">Novedades</Typography>
+          <Grid item xs={12} style={{ height: "5vh", display: "grid" }}>
+            <Typography variant="h5">Ultimos Post</Typography>
           </Grid>
 
           <Grid item container xs={12} justifyContent="flex-start">
@@ -86,7 +89,6 @@ const useStyles = makeStyles((theme) => ({
       right: 10,
   },
   botonlogout:{
-    right:10,
     "&:hover": {
       cursor: "pointer ",
     },
@@ -95,6 +97,14 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 10,
       right: 60,
+  },
+  avatar:{
+    display: "block",
+      color: "#999",
+      position: "absolute",
+      top: 10,
+      right: 150,
+
   },
   toolbar: {
     display: "flex",
