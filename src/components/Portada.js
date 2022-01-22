@@ -38,8 +38,8 @@ export const Portada = () => {
         <div className={classes.login___container}>
           <img className={classes.navlogo} src={logo} alt="" />
           <div>
-            {/*<Login />*/}
-            
+            {/**/}
+            <Login />
 
           </div>
           <form>

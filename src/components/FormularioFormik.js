@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import {
   getAuth,
   linkWithRedirect,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -37,9 +38,11 @@ export const FormularioFormik = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
+       
+        
 
         alert("Usuario correcto");
+        return <Link to="/database"/>;
         
       })
       .catch((error) => {
@@ -48,6 +51,7 @@ export const FormularioFormik = () => {
         alert("El usuario o la contraseña son invalidos");
       });
   };
+
 
   return (
     <>

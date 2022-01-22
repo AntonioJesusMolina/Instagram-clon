@@ -13,16 +13,16 @@ function App() {
   return (
     <div>
     
-        {/*<BrowserRouter>
+        <BrowserRouter>
           <div className="App">
             <Routes>
               <Route path="/" element={<Portada />} />
               <Route path="register" element={<Register />} />
-              <Route path="post" element={<Post />} />
+              <Route path="database" element={<Database />} />
             </Routes>
           </div>
-        </BrowserRouter>*/}
-        <Database/>
+        </BrowserRouter>
+        {/*<Database/>*/}
         
     
     </div>
