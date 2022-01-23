@@ -26,16 +26,17 @@ export const Database = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  
   const auth = getAuth();
-  signOut(auth)
-    .then(() => {
-      //navigate("/");
-      // Sign-out successful.
-    })
-    .catch((error) => {
-      // An error happened.
-    });
+  const salir = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/");
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
 
   useEffect(() => {
     db.collection("publicaciones").onSnapshot((snapshot) => {
@@ -55,7 +56,7 @@ export const Database = () => {
           <Toolbar className={classes.toolbar}>
             <img src={instalogo} className={classes.logo} alt="Logo" />
             <Avatar className={classes.avatar} src={yo}></Avatar>
-            <Button className={classes.botonlogout} onClick={signOut}>
+            <Button className={classes.botonlogout} onClick={salir}>
               Log Out
             </Button>
             <IconButton
