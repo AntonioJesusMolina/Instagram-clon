@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import { FormGroup, makeStyles } from "@material-ui/core";
 import { Button, Row, Col } from "reactstrap";
@@ -8,14 +8,17 @@ import {
   linkWithRedirect,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithRedirect,
 } from "firebase/auth";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { fir } from "../config/firebase";
 import { getValue } from "@testing-library/user-event/dist/utils";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export const FormularioFormik = () => {
   const classes = useStyles();
+
   /*const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");*/
   // const [currentValues, setCurrentValues] = useState();
@@ -33,17 +36,16 @@ export const FormularioFormik = () => {
       .min(6, `Mínimo 8 caracteres`),
   });
 
+  const navigate = useNavigate();
+
   const login = (email, password) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-       
-        
-
         alert("Usuario correcto");
-        return <Link to="/database"/>;
-        
+
+        navigate("database");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -51,7 +53,6 @@ export const FormularioFormik = () => {
         alert("El usuario o la contraseña son invalidos");
       });
   };
-
 
   return (
     <>

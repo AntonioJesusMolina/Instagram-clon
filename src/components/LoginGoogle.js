@@ -2,11 +2,13 @@ import React from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { makeStyles } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
 const provider = new GoogleAuthProvider();
 
 export const LoginGoogle = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
 
   const logingoogle = () => {
     const auth = getAuth();
@@ -18,6 +20,7 @@ export const LoginGoogle = () => {
         // The signed-in user info.
         const user = result.user;
         alert("Usuario conectado con google");
+        navigate("database");
         // ...
       })
       .catch((error) => {

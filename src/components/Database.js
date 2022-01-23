@@ -17,11 +17,25 @@ import {
   Typography,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export const Database = () => {
   const classes = useStyles();
   const [posts, setPost] = useState([]);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  
+  const auth = getAuth();
+  signOut(auth)
+    .then(() => {
+      //navigate("/");
+      // Sign-out successful.
+    })
+    .catch((error) => {
+      // An error happened.
+    });
 
   useEffect(() => {
     db.collection("publicaciones").onSnapshot((snapshot) => {
@@ -41,16 +55,16 @@ export const Database = () => {
           <Toolbar className={classes.toolbar}>
             <img src={instalogo} className={classes.logo} alt="Logo" />
             <Avatar className={classes.avatar} src={yo}></Avatar>
-            <Button className={classes.botonlogout}>Log Out</Button>
+            <Button className={classes.botonlogout} onClick={signOut}>
+              Log Out
+            </Button>
             <IconButton
               edge="end"
               className={classes.menubutton}
               onClick={() => setOpen(!open)}
             >
-              
               <MenuIcon fontSize="large"></MenuIcon>
             </IconButton>
-            
           </Toolbar>
         </AppBar>
 
@@ -83,28 +97,27 @@ const useStyles = makeStyles((theme) => ({
   },
   menubutton: {
     display: "block",
-      color: "#999",
-      position: "absolute",
-      top: 0,
-      right: 10,
+    color: "#999",
+    position: "absolute",
+    top: 0,
+    right: 10,
   },
-  botonlogout:{
+  botonlogout: {
     "&:hover": {
       cursor: "pointer ",
     },
     display: "block",
-      color: "#999",
-      position: "absolute",
-      top: 10,
-      right: 60,
+    color: "#999",
+    position: "absolute",
+    top: 10,
+    right: 60,
   },
-  avatar:{
+  avatar: {
     display: "block",
-      color: "#999",
-      position: "absolute",
-      top: 10,
-      right: 150,
-
+    color: "#999",
+    position: "absolute",
+    top: 10,
+    right: 150,
   },
   toolbar: {
     display: "flex",
