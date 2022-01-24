@@ -9,6 +9,7 @@ import { Link, NavLink } from "react-router-dom";
 import { almacenamiento} from "../config/firebase";
 import { getStorage, ref, listAll } from "firebase/storage";
 import { Database } from "./Database";
+import * as AiIcons from "react-icons/ai";
 
 export const Portada = () => {
   const classes = useStyles();
@@ -45,7 +46,7 @@ export const Portada = () => {
           <form>
             <br />
             <a href="#" className={classes.portada__texto}>
-              <i className="fab fa-facebook" /> Logéate con Facebook
+              <i /> Logéate con Facebook<AiIcons.AiFillFacebook/>
             </a>
             <br />
 

@@ -15,7 +15,7 @@ function Post({ nombre, textoPublicacion, imagenAvatar, urlimagen}) {
     <div className={classes.post}>
     <Card className={classes.card}>
           <CardHeader
-            avatar={<Avatar alt="Antonio" src={imagenAvatar}></Avatar>}
+            avatar={<Avatar alt="fotoAvatar" src={imagenAvatar}></Avatar>}
             title={nombre}
             subheader={new Date().toDateString()}
             action={

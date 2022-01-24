@@ -3,6 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { makeStyles } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
+import * as AiIcons from "react-icons/ai";
 
 const provider = new GoogleAuthProvider();
 
@@ -43,7 +44,7 @@ export const LoginGoogle = () => {
         variant="contained"
         onClick={logingoogle}
       >
-        Logéate con Google
+        Logéate con Google  <AiIcons.AiFillGoogleCircle/>
       </button>
     </div>
   );
