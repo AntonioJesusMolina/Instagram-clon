@@ -19,6 +19,7 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { MenuLateral } from "./MenuLateral";
 
 export const Database = () => {
   const classes = useStyles();
@@ -72,6 +73,9 @@ export const Database = () => {
         <Grid container className={classes.gridcard}>
           <Grid item xs={12} style={{ height: "5vh", display: "grid" }}>
             <Typography variant="h5">Ultimos Post</Typography>
+          </Grid>
+          <Grid>
+            <MenuLateral></MenuLateral>
           </Grid>
 
           <Grid item container xs={12} justifyContent="flex-start">
