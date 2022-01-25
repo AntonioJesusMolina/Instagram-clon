@@ -7,6 +7,12 @@ import { IconContext } from "react-icons";
 import { makeStyles } from "@material-ui/core";
 import "./MenuLateral.css";
 import { BsInstagram } from "react-icons/bs";
+import InstagramIcon from "@material-ui/icons/Instagram";
+import HomeIcon from "@material-ui/icons/Home";
+import Friends from "@material-ui/icons/People";
+import Mensajes from "@material-ui/icons/Message";
+import Soporte from "@material-ui/icons/ContactSupport";
+import Book from "@material-ui/icons/Book";
 
 export const MenuLateral = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -18,37 +24,37 @@ export const MenuLateral = () => {
     {
       title: "Home",
       path: "/",
-      icon: <AiIcons.AiOutlineHome />,
+      icon: <HomeIcon />,
       cName: "nav-text",
     },
     {
       title: "Destacado",
       path: "/reports",
-      icon: <IoIcons.IoIosPaper />,
+      icon: <Book />,
       cName: "nav-text",
     },
     {
       title: "Publicaciones",
       path: "/publicaciones",
-      icon: <BsInstagram />,
+      icon: <InstagramIcon />,
       cName: "nav-text",
     },
     {
       title: "Amigos",
       path: "/team",
-      icon: <IoIcons.IoMdPeople />,
+      icon: <Friends />,
       cName: "nav-text",
     },
     {
       title: "Mensajes",
       path: "/messages",
-      icon: <FaIcons.FaEnvelopeOpenText />,
+      icon: <Mensajes />,
       cName: "nav-text",
     },
     {
       title: "Soporte",
       path: "/support",
-      icon: <IoIcons.IoMdHelpCircle />,
+      icon: <Soporte />,
       cName: "nav-text",
     },
   ];
@@ -57,7 +63,7 @@ export const MenuLateral = () => {
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
         <nav className="nav-menu">
-          <ul className="nav-menu-items" onClick={showSidebar}>
+          <ul className="nav-menu-items">
             <li className="navbar-toggle">
               <Link to="#" className={classes.menubars}>
                 <AiIcons.AiOutlineClose />
