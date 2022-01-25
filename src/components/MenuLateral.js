@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import * as IoIcons from "react-icons/io";
 import { Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { makeStyles } from "@material-ui/core";
 import "./MenuLateral.css";
-import { BsInstagram } from "react-icons/bs";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import HomeIcon from "@material-ui/icons/Home";
 import Friends from "@material-ui/icons/People";
